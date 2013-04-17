@@ -80,7 +80,7 @@ this will return the following json:
 {"some key": "some value"}
 ```
 
-### force users to login with google account
+### force users to login with a google account
 
 ```python
 ### main.py
