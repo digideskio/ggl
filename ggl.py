@@ -37,9 +37,14 @@ class RouteRegister(object):
 
         RouteRegister.reverse_mapping[function.__name__] = url
         klass_name = "URL_{0}".format(len(RouteRegister.urls))
-        klass = type(klass_name, (webapp2.RequestHandler,), {method:func_helper(function), "render":render, "render_json":render_json,})
+        klass = type(klass_name, (webapp2.RequestHandler,), {method:func_helper(function), 
+            "render":render, "render_json":render_json,})
         RouteRegister.urls.append((url, klass))
-        logging.info("CLASS:'{5}' URL:'{0}' METHOD:'{1}' FUNCTION:'{2}' FILE:'{3}' LINE:{4}".format(url, method, function.__name__, function.func_code.co_filename, function.func_code.co_firstlineno, klass_name))
+        
+        ### log the ressource
+        log_base = "CLASS:'{5}' URL:'{0}' METHOD:'{1}' FUNCTION:'{2}' FILE:'{3}' LINE:{4}"
+        logging.info(log_base.format(url, method, function.__name__, 
+            function.func_code.co_filename, function.func_code.co_firstlineno, klass_name))
 
 def login(context, return_url="/"):
     """Force the user to log in."""
