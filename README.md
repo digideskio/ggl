@@ -1,10 +1,12 @@
 ggl
 ===
 
-a google app engine framework
+a tiny google app engine framework, to make your life even easier
 
 ## installation
-simply check out ggl.py and put it into your google app engine app.
+simply check out ggl.py and put it into your google app engine app. The ggl-framework just contains some tiny 
+shortcuts. Besides these shortcuts you need to use the standard 
+[google app engine framework](https://developers.google.com/appengine/docs/python/overview).
 
 ## usage
 
@@ -54,3 +56,27 @@ def newcall(context):
 
 app = build_app()
 ```
+
+## how it works
+Here is some standard google app engine code:
+```python
+import webapp2
+
+class MainHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.write('Hello world!')
+
+app = webapp2.WSGIApplication([('/', MainHandler)],
+                              debug=True)
+```
+
+## why I have done this
+I have implemented quite a view applications with the [flask framework](http://flask.pocoo.org/) and grew 
+quite comfortable with its application design. With just a few lines of code you are up and running.
+I also like the (google app engine)[https://developers.google.com/appengine/] project a lot, since it 
+basically gives me a cloud instance, running python for free. However, I found the 
+[python framework](https://developers.google.com/appengine/docs/python/overview) in parts a bit too heavy
+and therefore implemented some short-cuts, which you can find in this project.
+
+If you think I might have missed something or could do things even better please let me know about it and 
+send me a github message/bug-report!
