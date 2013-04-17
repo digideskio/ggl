@@ -24,20 +24,46 @@ def app_get(context):
 app = build_app()
 ```
 
+different HTTP-verbs
 ```python
 ### main.py
 from ggl import build_app, route
 
+@route("/app")
+def app_get(context):
+    context.render("templates/app.html")
+
+@route("/app", "post")
+def app_post(context):
+    context.render("templates/app.html")
+
+@route("/app", "put")
+def app_put(context):
+    context.render("templates/app.html")
+
+@route("/app", "delete")
+def app_delete(context):
+    context.render("templates/app.html")
+
+app = build_app()
+```
+
+### url-queries
+
+```python
+### main.py
+from ggl import build_app, route
 
 ### for /app?name=Marco&year=2013
 ### query strings will be provided via **kwargs
 @route("/app")
 def app_get(context, name, year):
-    ### your code here
     context.render("templates/app.html")
 
 app = build_app()
 ```
+
+### returning json
 
 ```python
 ### main.py
@@ -45,28 +71,10 @@ from ggl import build_app, route
 
 @route("/app")
 def app_get(context):
-    ### your code here
-    context.render("templates/app.html")
-
-@route("/app", "post")
-def app_post(context):
-    ### your code here
-    context.render("templates/app.html")
-
-@route("/app", "put")
-def app_put(context):
-    ### your code here
-    context.render("templates/app.html")
-
-@route("/app", "delete")
-def app_delete(context):
-    ### your code here
-    context.render("templates/app.html")
+    context.render_json({"some key":"some value"})
 
 app = build_app()
 ```
-
-
 
 ### force users to login with google account
 
@@ -80,7 +88,6 @@ def app_get(context):
     """this function will only be accessed when the user 
     has successfully logged into his google account
     and given your application permission to use it"""
-    ### your code here
     context.render("templates/app.html")
 
 app = build_app()
@@ -95,7 +102,6 @@ from ggl import build_app, route, get_url_for_func
 def newcall(context):
     """this function will redirect the request to the url 
     of the function 'app'"""
-    ### your code here
     context.redirect(get_url_for_func("app_get"))
 
 @route("/app")
