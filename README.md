@@ -65,6 +65,10 @@ import webapp2
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write('Hello world!')
+    
+    def post(self):
+        name = self.response.get("name")
+        self.response.write('Hello world!')
 
 app = webapp2.WSGIApplication([('/', MainHandler)],
                               debug=True)
@@ -74,11 +78,18 @@ this will map to the following ggl-framework code:
 from ggl import build_app, route
 
 @route("/")
-def app(context):
+def app_get(context):
+    context.write('Hello world!')
+
+@route("/", "post")
+def app_post(context, name):
     context.write('Hello world!')
 
 app = build_app(debug=True)
 ```
+For each route a "webapp2.RequestHandler" class will be created and receives one class function. This function
+exactly mapps to the get/post/put/delete function of the "webapp2.RequestHandler". Also, all query strings will
+me mapped to kwargs, so you don't have to go through the context/response-object to get them.
 
 ## why I have done this
 I have implemented quite a view applications with the [flask framework](http://flask.pocoo.org/) and grew 
