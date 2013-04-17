@@ -74,6 +74,5 @@ def route(url, method="get"):
 def get_url_for_func(func):
     return RouteRegister.reverse_mapping[func]
 
-def build_app():
-    debug = os.environ.get('SERVER_SOFTWARE', '').startswith('Dev')
-    return webapp2.WSGIApplication(RouteRegister.urls, debug=debug)
+def build_app(*args, **kwargs):
+    return webapp2.WSGIApplication(RouteRegister.urls, *args, **kwargs)
