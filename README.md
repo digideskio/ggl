@@ -69,6 +69,16 @@ class MainHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([('/', MainHandler)],
                               debug=True)
 ```
+this will map to the following ggl-framework code:
+```python
+from ggl import build_app, route
+
+@route("/")
+def app(context):
+    context.write('Hello world!')
+
+app = build_app(debug=True)
+```
 
 ## why I have done this
 I have implemented quite a view applications with the [flask framework](http://flask.pocoo.org/) and grew 
