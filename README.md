@@ -105,7 +105,7 @@ def app_get(context):
 app = build_app()
 ```
 
-## how it works
+## how the backend works
 Here is some standard google app engine code:
 ```python
 import webapp2
