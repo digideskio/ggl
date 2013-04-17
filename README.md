@@ -142,7 +142,7 @@ me mapped to kwargs, so you don't have to go through the context/response-object
 ## why I have done this
 I have implemented quite a view applications with the [flask framework](http://flask.pocoo.org/) and grew 
 quite comfortable with its application design. With just a few lines of code you are up and running.
-I also like the (google app engine)[https://developers.google.com/appengine/] project a lot, since it 
+I also like the [google app engine](https://developers.google.com/appengine/) project a lot, since it 
 basically gives me a cloud instance, running python for free. However, I found the 
 [python framework](https://developers.google.com/appengine/docs/python/overview) in parts a bit too heavy
 and therefore implemented some short-cuts, which you can find in this project.
