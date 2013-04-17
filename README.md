@@ -75,6 +75,10 @@ def app_get(context):
 
 app = build_app()
 ```
+this will return the following json:
+```json
+{"some key": "some value"}
+```
 
 ### force users to login with google account
 
