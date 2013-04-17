@@ -17,12 +17,56 @@ shortcuts. Besides these shortcuts you need to use the standard
 from ggl import build_app, route
 
 @route("/app")
-def app(context):
+def app_get(context):
     ### your code here
     context.render("templates/app.html")
 
 app = build_app()
 ```
+
+```python
+### main.py
+from ggl import build_app, route
+
+
+### for /app?name=Marco&year=2013
+### query strings will be provided via **kwargs
+@route("/app")
+def app_get(context, name, year):
+    ### your code here
+    context.render("templates/app.html")
+
+app = build_app()
+```
+
+```python
+### main.py
+from ggl import build_app, route
+
+@route("/app")
+def app_get(context):
+    ### your code here
+    context.render("templates/app.html")
+
+@route("/app", "post")
+def app_post(context):
+    ### your code here
+    context.render("templates/app.html")
+
+@route("/app", "put")
+def app_put(context):
+    ### your code here
+    context.render("templates/app.html")
+
+@route("/app", "delete")
+def app_delete(context):
+    ### your code here
+    context.render("templates/app.html")
+
+app = build_app()
+```
+
+
 
 ### force users to login with google account
 
@@ -32,7 +76,7 @@ from ggl import build_app, route, force_login
 
 @route("/app")
 @force_login
-def app(context):
+def app_get(context):
     """this function will only be accessed when the user 
     has successfully logged into his google account
     and given your application permission to use it"""
