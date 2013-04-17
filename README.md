@@ -96,7 +96,11 @@ def newcall(context):
     """this function will redirect the request to the url 
     of the function 'app'"""
     ### your code here
-    context.redirect(get_url_for_func("app"))
+    context.redirect(get_url_for_func("app_get"))
+
+@route("/app")
+def app_get(context):
+    ### ...
 
 app = build_app()
 ```
