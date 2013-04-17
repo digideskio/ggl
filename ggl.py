@@ -7,6 +7,7 @@ from google.appengine.api import users
 from functools import wraps
 
 class RouteRegister(object):
+    """Register urls and functions and build webapp2.RequestHandler's for them"""
 
     urls = []
     reverse_mapping = {}
@@ -16,16 +17,17 @@ class RouteRegister(object):
         """Register an URL"""
 
         def render_json(self, obj):
+            """Render a json string of the given object"""
             json_str = json.dumps(obj)
             self.response.headers['Content-Type'] = 'application/json'
             self.response.out.write(json_str)
 
         def render(self, template_file, **values):
-            """Serve templates"""
+            """Render the template"""
             self.response.out.write(template.render(template_file, values))
 
         def func_helper(func):
-            """Pre-extract the query"""
+            """Extract the url query-string and put it into kwargs"""
             def wrapper(context, *args, **kwargs):
                 query = context.request
                 queries = dict((q, query.get(q)) for q in query.arguments())
@@ -45,6 +47,7 @@ def login(context, return_url="/"):
     context.render("templates/login.html", login_url=login_url, )
 
 def force_login(func):
+    """Force the user to login with his google-account"""
     @wraps(func)
     def wrapper(*args, **kwargs):
         user = users.get_current_user()
@@ -72,7 +75,9 @@ def route(url, method="get"):
     return wrap
 
 def get_url_for_func(func):
+    """Reverse url-mapper; return the url to a function-name"""
     return RouteRegister.reverse_mapping[func]
 
 def build_app(*args, **kwargs):
+    """Return a WSGIApplication"""
     return webapp2.WSGIApplication(RouteRegister.urls, *args, **kwargs)
